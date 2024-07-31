@@ -1,0 +1,21 @@
+#card-margin{
+    margin-top: 20px;
+}
+
+ion-card{
+    --background: var(--ion-color-gray);
+    border: solid;
+    border-width: 20px;
+}
+
+ion-card-title{
+    color: Black;
+    border-bottom: solid;
+    border-width: 2px;
+}
+
+ion-card-content{
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}

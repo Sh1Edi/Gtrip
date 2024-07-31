@@ -1,0 +1,143 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="blue">
+    <ion-title class="ion-text-center">
+      <img src="assets/icon/g-trip-white.png" alt="Sin imagen" width="60px">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="white">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card color="medium">
+          <ion-card-content>
+            <ion-card-title class="ion-text-center">Crea tu cuenta</ion-card-title>
+
+            <div class="ion-text-center">
+              <ion-avatar class="image-circle">
+                <img *ngIf="imageSource" [src]="imageSource" alt="imageSource">
+              </ion-avatar>
+              <ion-button color="blue" class="boton" (click)="takePicture()">Subir foto</ion-button>
+            </div>
+
+            <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+
+              <ion-item>
+                <ion-label position="floating">Ingrese su RUT:</ion-label>
+                <ion-input formControlName="rutusuario" placeholder="Ej: 21345336-0" type="text"></ion-input>
+                <ion-icon name="help-circle" slot="end" class="animated-icon" (click)="mostrarInfo('rut')"></ion-icon>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('rutusuario')?.hasError('invalidRut') && registroForm.get('rutusuario')?.touched"
+                color="danger">
+                Ingresa un RUT válido (Ej: 12345678-9).
+              </ion-note>
+
+              <ion-item>
+                <ion-label position="floating">Ingrese su nombre:</ion-label>
+                <ion-input formControlName="nombreusuario" placeholder="Ej: Pedro" type="text"></ion-input>
+                <ion-icon name="help-circle" slot="end" class="animated-icon"
+                  (click)="mostrarInfo('nombre')"></ion-icon>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('nombreusuario')?.hasError('invalidNombre') && registroForm.get('nombreusuario')?.touched"
+                color="danger">
+                Debe iniciar en mayúscula, no se permiten números o caracteres especiales ni espacios en blanco.
+              </ion-note>
+
+              <ion-item>
+                <ion-label position="floating">Ingrese su apellido:</ion-label>
+                <ion-input formControlName="apellidousuario" placeholder="Ej: Díaz" type="text"></ion-input>
+                <ion-icon name="help-circle" slot="end" class="animated-icon"
+                  (click)="mostrarInfo('apellido')"></ion-icon>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('apellidousuario')?.hasError('invalidApellido') && registroForm.get('apellidousuario')?.touched"
+                color="danger">
+                Debe iniciar en mayúscula, no se permiten números o caracteres especiales ni espacios en blanco.
+              </ion-note>
+
+              <ion-item>
+                <ion-label position="floating">Ingrese su correo:</ion-label>
+                <ion-input formControlName="correoUsuario" placeholder="Ej: correo@gmail.com" type="email"></ion-input>
+                <ion-icon name="help-circle" slot="end" class="animated-icon"
+                  (click)="mostrarInfo('correo')"></ion-icon>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('correoUsuario')?.hasError('invalidCorreo') && registroForm.get('correoUsuario')?.touched"
+                color="danger">
+                Ingresa un correo válido (Ej: ejemplo@correo.com).
+              </ion-note>
+
+              <ion-item>
+                <ion-label position="floating">Ingrese su teléfono:</ion-label>
+                <ion-input formControlName="telefono" placeholder="Ej: 123456789" type="tel"></ion-input>
+                <ion-icon name="help-circle" slot="end" class="animated-icon"
+                  (click)="mostrarInfo('telefono')"></ion-icon>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('telefono')?.hasError('invalidTelefono') && registroForm.get('telefono')?.touched"
+                color="danger">
+                Ingresa un número de teléfono válido.
+              </ion-note>
+
+              <ion-item>
+                <ion-label position="floating">Ingrese su contraseña:</ion-label>
+                <ion-input formControlName="contra" [type]="mostrarContrasena ? 'text' : 'password'"></ion-input>
+                <ion-icon name="help-circle" slot="end" class="animated-icon"
+                  (click)="mostrarInfo('contrasena')"></ion-icon>
+                <ion-icon name="eye" slot="end" (click)="toggleMostrarContrasena()"></ion-icon>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('contra')?.hasError('invalidContrasena') && registroForm.get('contra')?.touched"
+                color="danger">
+                Debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una letra minúscula, un dígito y un
+                carácter especial. No debe incluir espacios.
+              </ion-note>
+
+              <ion-item>
+                <ion-label position="floating">Confirmar Contraseña</ion-label>
+                <ion-input formControlName="confirmContra" [type]="mostrarContrasena ? 'text' : 'password'"></ion-input>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('confirmContra')?.touched && registroForm.get('confirmContra')?.hasError('notMatched')"
+                color="danger">
+                Las contraseñas no coinciden.
+              </ion-note>
+
+              <ion-item style="color:white;">
+                <ion-select placeholder="Selecciona una pregunta" formControlName="eleccionPregunta">
+                  <ion-select-option *ngFor="let pregunta of arreglosPreguntas" [value]="pregunta.idpregunta">{{ pregunta.pregunta }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Ingrese su respuesta:</ion-label>
+                <ion-input formControlName="respuesta" placeholder="Ingresa tu respuesta aqui" type="text"></ion-input>
+                <ion-icon name="help-circle" slot="end" class="animated-icon"
+                  (click)="mostrarInfo('respuesta')"></ion-icon>
+              </ion-item>
+              <ion-note
+                *ngIf="registroForm.get('respuesta')?.hasError('invalidrespuesta') && registroForm.get('respuesta')?.touched"
+                color="danger">
+                Debe tener una longitud mínima de 5 caracteres.
+              </ion-note>
+              
+              <ion-button color="blue" expand="full" type="submit" [disabled]="!registroForm.valid">Registrarse</ion-button>
+            <br/>
+              <ion-button color="blue" expand="full" type="button" (click)="irMenu()">¿Ya tienes una cuenta?</ion-button>
+            </form>
+            
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

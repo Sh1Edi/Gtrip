@@ -1,0 +1,7 @@
+{
+  "name": "gtrip",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

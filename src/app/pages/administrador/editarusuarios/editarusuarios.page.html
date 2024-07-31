@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="blue">
+    <ion-title class="ion-text-center">
+      <img src="assets/icon/g-trip-white.png" alt="Sin imagen" width="60px">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="white">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">editarusuarios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Inicio del contenido -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+
+        <!-- INICIO del contenido -->
+        <h1 class="ion-text-center">Editar Usuario</h1>
+        <ion-card class="ion-text-center" id="card-margin-top" *ngFor="let x of arregloUsuarios">
+          <ion-card-header>
+            <ion-card-title>Editar usuario</ion-card-title>
+          </ion-card-header>               
+
+          <ion-card-content> 
+            <p style="color: red" *ngIf="x.status == 2">Usuario Bloqueado</p>
+            <div *ngFor="let t of arregloTabla">
+              <p style="margin: 20px; color:white" *ngIf="t.idrol == x.idtablarol"> idUsuario:{{x.idusuario}} <br> Correo: {{x.correoUsuario }} <br/> idtablarol: {{t.nombrerol}}</p> 
+            </div>
+          </ion-card-content>                               
+          <ion-button (click)="botonEditar(x)">Editar</ion-button>                  
+        </ion-card>
+        <!-- Final del contenido -->
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <!-- Final del contenido -->
+</ion-content>
+<ion-footer>
+  <!--<ion-tabs>-->
+  <ion-tab-bar slot="bottom" color="blue">
+    <ion-tab-button tab="home" class="menu" (click)="irMenu()">
+      <ion-icon name="folder-open-outline" ></ion-icon>
+      Menu
+    </ion-tab-button>
+    <ion-tab-button tab="radio" (click)="irEditar()">
+      <ion-icon name="people-outline" style="color: white;"></ion-icon>
+      Editar
+    </ion-tab-button>
+    <ion-tab-button tab="library" (click)="bloquearEliminar()">
+      <ion-icon name="person-remove-outline"></ion-icon>
+      Eliminar/bloquear
+    </ion-tab-button>
+
+    <ion-tab-button tab="search" (click)="irAjustes()">
+      <ion-icon name="settings-outline"></ion-icon>
+      Ajustes
+    </ion-tab-button>
+  </ion-tab-bar>
+  <!--</ion-tabs>-->
+</ion-footer>

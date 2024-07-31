@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="blue">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="white">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">modificarcontra</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+
+        <div class="ion-text-center">
+          <img src="assets/icon/g-trip.png" alt="Sin imagen" width="80%">
+        </div>
+
+        <div class="ion-text-center">
+          <p style="word-wrap: break-word;white-space: normal;">Recuerda que al modificar tu contraseña, deberas volver
+            a iniciar sesión</p>
+        </div>
+
+        <form (submit)="modificarContrasena()">
+          <ion-item>
+            <ion-label position="floating" style="color: gray;">Contraseña actual:</ion-label>
+            <ion-input type="text" readonly value="{{usuario?.contra}}"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label style="color: gray;" position="floating">Nueva Contraseña:</ion-label>
+            <ion-input placeholder="Ingresa tu nueva contraseña" [(ngModel)]="nuevaContrasena"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label style="color: gray;" position="floating">Repetir Contraseña:</ion-label>
+            <ion-input placeholder="Repetir nueva contraseña" [(ngModel)]="repetirContrasena"></ion-input>
+          </ion-item>
+          <div class="ion-text-center" id="separar">
+            <ion-button type="submit" shape="round" expand="block" color="blue">Confirmar</ion-button>
+            <ion-button shape="round" expand="block" color="blue" (click)="volver()">Volver al menu</ion-button>
+          </div>
+        </form>
+
+        <br />
+
+
+        <br />
+       
+    
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="blue">
+    <ion-title class="ion-text-center">
+      <img src="assets/icon/g-trip-white.png" alt="Sin imagen" width="60px">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="white">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">editaruser</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card id="card-margin-t" class="ion-text-center">
+          <ion-card-header>
+            <ion-card-title>
+              Usuario
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div>
+              <p>Nombre: {{nombreuser}}</p>
+              <p>Apellido: {{apellidouser}}</p>
+              <p>Correo: {{correouser}}</p>
+              <p>Telefono: {{telefonouser}}</p>
+              <p>Rut: {{rutuser}}</p>
+              <div *ngIf="autoUser == 2">
+                <div *ngFor="let x of vehiculo">
+                  <div *ngIf="x.idu == id">
+                    <p>Auto: Tiene auto</p>
+                    <p>Modelo: {{x.modelovehiculo}}</p>
+                    <p>Patente: {{x.patente}}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div *ngIf="autoUser == 1">
+                <p>Auto: No tiene auto</p>
+              </div>
+
+              <div *ngIf="statusUser == 2">
+                <p style="color: red">Bloqueado</p>
+                <br/>
+                <ion-button (click)="desbloquear()">Desbloquear</ion-button>
+              </div>
+            </div>
+            <div>
+              <ion-select [(ngModel)]="eleccion" label="Status">
+                <div *ngFor="let c of arregloTabla">
+                  <ion-select-option [value]="c">{{c.nombrerol}}</ion-select-option>
+                </div>
+              </ion-select> 
+            </div>
+            
+            <br/>
+
+            <ion-button (click)="volver()">Volver</ion-button>
+            <ion-button (click)="botonConfirmar(eleccion)">Confirmar</ion-button>
+          </ion-card-content>
+        </ion-card>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

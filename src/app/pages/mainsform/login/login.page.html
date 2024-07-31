@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="blue">
+    <ion-title class="ion-text-center">
+      <img src="assets/icon/g-trip-white.png" alt="Sin imagen" width="60px">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="white">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Inicio del contenido -->
+
+  <ion-grid>
+    <ion-row> <!-- Inicio Fila 1 -->
+      <ion-col size="12"> <!-- Columna 1 Inicio -->
+
+        <ion-card style="border-radius: 25px;">
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>Bienvenido</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="ion-text-center error-message">
+              {{ mensajeError}}
+            </div>
+            <form [formGroup]="formularioLogin">
+              <ion-item fill="outline">
+                <ion-label position="floating" style="color: white;">USUARIO</ion-label>
+                <ion-input placeholder="Ingresa tu correo" formControlName="nombre"></ion-input>
+              </ion-item>
+              <ion-item fill="outline">
+                <ion-label position="floating" style="color: white;">CONTRASEÑA</ion-label>
+                <ion-input placeholder="Ingresa Contraseña" formControlName="password"
+                  type="{{ mostrarContrasena ? 'text' : 'password' }}"></ion-input>
+                <ion-icon name="eye" slot="end" (click)="toggleMostrarContrasena()"></ion-icon>
+              </ion-item>
+              <ion-item fill="none">
+                <ion-checkbox labelPlacement="end" slot="start" (ionChange)="toggleRecordar($event)">Recordarme</ion-checkbox>
+              </ion-item>
+
+              <div class="ion-text-center">
+                <ion-button color="blue" type="submit" fill="solid" (click)="onSubmit()">Iniciar sesión</ion-button>
+                <ion-button color="blue" (click)="irRecuperar()">Olvide mi contraseña</ion-button>
+              </div>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col> <!-- Columna 1 Final -->
+
+    </ion-row> <!-- Final Fila 1 -->
+
+  </ion-grid>
+ 
+  <!-- Final del contenido -->
+</ion-content>
